@@ -17,6 +17,4 @@ L'agence de chemin de fer vous demande de mettre en place une base de données e
 
     permettre à des clients de réserver des billets, annuler leur réservation ou la modifier (seulement s'ils ont une assurance, pour ce dernier cas),
 
-<<<<<<< README.md
     obtenir des statistiques sur le fonctionnement de l'agence : taux de remplissage des trains, age des voyageurs, gares les plus en sureffectifs, etc.
-
