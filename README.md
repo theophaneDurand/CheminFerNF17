@@ -45,7 +45,7 @@ Fichiers permettant de visualiser le diagramme UML en format png ou svg.
 
 Fichier contenant la note de clarification du projet.
 
-# -------------------------------------------------------------------------Non implémenté sous cette ligne------------------------------------------------------------
+# ------------Non implémenté sous cette ligne-----------------------
 
 ### 3) Relationnel_Normalisation_Héritage.md
 
