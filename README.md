@@ -35,11 +35,9 @@ obtenir des statistiques sur le fonctionnement de l'agence : taux de remplissage
 Le dépot est constitué de plusieurs fichiers et dossiers.
 Ce projet a été réalisé en SQL pour le SGBD Postgres.
 
-### 1) Dossier UML files
+### 1) UML.png
 
-##### UML.png et UML.svg 
-
-Fichiers permettant de visualiser le diagramme UML en format png ou svg.
+Fichiers permettant de visualiser le diagramme UML en format png.
 
 ### 2) Note de clarification.md
 
