@@ -2,35 +2,29 @@
 ## Relations :
 ### Tables :
 
-**Gare**(#nom : string, adresse : string, min_tps_plein : integer, ville => Ville.nom) avec adresse UNIQUE NOT NULL, min_tps_plein NOT NULL, ville NOT NULL
 **Ville**(#nom : string, GMT : integer) avec GMT NOT NULL et -12 < GMT > 12
-**Hotel**(#?, nom : string, adresse : string, tel : integer, ville => Ville.nom) avec adresse et tel UNIQUE NOT NULL, nom et ville NOT NULL
-**Taxi**(#?, nom : string, adresse : string, tel : integer) avec adresse et tel UNIQUE NOT NULL, nom NOT NULL
-**Taxis_dessert**(#taxi => Taxis, #ville => Ville.nom)
+**Gare**(#nom : string, adresse : string, min_tps_plein : integer, ville => Ville.nom) avec adresse UNIQUE NOT NULL, min_tps_plein NOT NULL, ville NOT NULL
+**Hotel**(#id, nom : string, adresse : string, tel : integer, ville => Ville.nom) avec adresse et tel UNIQUE NOT NULL, nom et ville NOT NULL
+**Hotel_Gare**(#hotel => Hotel.id, #gare => Gare.nom)
+**Taxi**(#id, nom : string, adresse : string, tel : integer) avec adresse et tel UNIQUE NOT NULL, nom NOT NULL
+**Taxis_Hotel**(#taxi => Taxi.id, #gare => Gare.nom)
 **Voyageur**(#id : integer, nom : string, prenom : string, adresse : string, tel : integer) avec nom, prenom, adresse, tel NOT NULL
 **Employe**(#id : integer, nom : string, prenom : string, adresse : string, tel : integer, metier : {Guichetier, Aiguilleur}) avec nom, prenom, adresse, tel, metier NOT NULL
 **Temps_plein**(#employe => Employer.id, #gare => Gare.nom) avec employe UNIQUE
 **Mi_temps**(#employe => Employer.id, #gare => Gare.nom)
-**billet**(#?, voyageur => Voyageur.id, paiement : {CB, espece, cheque}, prix : integer, internet : boolean, assurance : integer)
-**Trajet**()
-**itineraire**()
 **Type_train**(#nom : string, nb_place_max : integer, premiere_classe_dispo : boolean, vitesse_max : integer) avec nb_place_max, premiere_classe_dispo, vitesse_max NOT NULL
 **Train**(#numero, type => Type_train.nom) avec type NOT NULL
+**Billet**(#heure_achat : timestamp, #voyageur => Voyageur.id, paiement : {CB, espece, cheque}, prix : integer, internet : boolean, assurance : integer)
+**Trajet**(#billet_heure => Billet.heure_achat, #billet_voyageur => Billet.voyageur, siege : int, train => Train.numero)
+**Itineraire**(#id : int, type_train => Type_train)
+**Portion**(#itineraire => Itineraire.id, #depart => Gare.nom, #arrivee => Gare.nom, horaire_depart = timestamp, horaire_arrivee = timestamp)
+**Trajet_Portion**(#trajet_billet_heure => Trajet.billet_heure, #trajet_billet_voyageur => Trajet.billet_voyageur, #portion_itineraire => Portion.itineraire, #portion_depart => Portion.depart, #portion_arrivee => Portion.arrivee).
 
-
-
-
-
-
-**Logiciel**(#NomDeve: string , Nom: string, DateLancement: date) avec Nom UNIQUE
-
-**Achat**(#NomLogiciel=>Logiciel.NomDeve,#Client=>Client.Telephone, #Date: date)
-
-
-
-
-
-
+### Vues :
+vPersonne = UNION(PROJECTION(Employe, nom, prenom, adresse, tel), PROJECTION(Voyageur, nom, prenom, adresse, tel))
+vGuichetier = PROJECTION(RESTRICTION(Employe, metier = Guichetier) nom, prenom, adresse, tel)
+vAiguilleur = PROJECTION(RESTRICTION(Employe, metier = Aiguilleur) nom, prenom, adresse, tel)
+vContrat = UNION(PROJECTION(Temps_plein, employe, gare), PROJECTION(Mi_temps, employer, gare))
 
 
 
@@ -70,10 +64,8 @@ je choisi par classe fille car classe mere abstraite + association sur classes f
 
 
 Questions à poser au prof :
-- dans itinéraire, part de et arrive à pourrient être fusionner avec dessert ? Comment différencier la ville de départ et celle d'arrivée ?
-- Trajet est il une composition de Itinéraires ? Car ça me semble être deux notions différentes (l'une plus coté agence et l'autre plus coté client. Entre autre à cause du numéro de siège)
-- Un même billet peut il être pour plusieurs voyageurs ?
-- Quelle clé doner à billet ?
+- Est ce que vous validez bien que sur un même itinéraire un train ne peut pas faire deux fois la même portion de voyage ?
+-
 
 
 Bonjour,
