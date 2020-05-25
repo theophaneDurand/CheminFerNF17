@@ -68,7 +68,7 @@ On souhaite aussi connaître la méthode de paiement (chèque, espèce, CB...).
 Le prix du billet est diminué de 10% si la vente s'est fait en ligne. Il est aussi possible de souscrire à une assurance qui permet de modifier les dates du billet. Cette assurance permet aussi d'annuler gratuitement le billet. Sans l'assurance, l'anulation coute 10% du prix du billet.
 
 Un billet peut être composé de plusieurs trajet.
-Un trajet est composé de deux villes. Une de départ et une d'arrivée. Il est aussi constitué d'un numéro de siège. La durée du trajet est calculée avec l'heure d'arrivée et l'heure de fin.
+A chaque trajet est associé un train et un numéro de siège. Un trajet effecute une portion d'itinéraire. Le trajet est identifié par le billet qui lui correspond et par l'horaire de départ de sa portion.
 
 ### Gestion des trains :
 
@@ -76,7 +76,8 @@ Un train à un numéro unique et un type. Les types de trains ont un nom et déf
 
 ### Gestion des itinéraires :
 
-Un itinéraire est constitué d'une gare de départ, d'un horaire de départ, d'une gare terminus et d'un horaire d'arrivé. Un itinéraire peut désservir plusieurs gares entre celle de départ et celle d'arrivée chacune ayant leur horaire de désserte. L'itinéraire est parcouru par un type de train.
+Les itinéraires sont composé de différentes portions. Un type de train est associé à chaque itinéraire.
+Les portions sont composées d'une gare de départ et d'une d'arrivée. Ainsi que d'une heure de départ et d'une heure d'arrivée. La durée de parcours d'une portion se calcule avec les heures de départ et d'arrivée.
 
 ### Requêtes :
 
