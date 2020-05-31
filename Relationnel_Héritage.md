@@ -6,17 +6,17 @@
 
 **Gare**(#nom : string, adresse : string, min_tps_plein : integer, ville => Ville.nom)
 
-**Hotel**(#id, nom : string, adresse : string, tel : integer, ville => Ville.nom)
+**Hotel**(#id : integer, nom : string, adresse : string, tel : integer, ville => Ville.nom)
 
 **Hotel_Gare**(#hotel => Hotel.id, #gare => Gare.nom)
 
-**Taxi**(#id, nom : string, adresse : string, tel : integer, ville => Ville.nom)
+**Taxi**(#id: integer, nom : string, adresse : string, tel : integer, ville => Ville.nom)
 
-**Taxis_Hotel**(#taxi => Taxi.id, #gare => Gare.nom)
+**Taxis_Gare**(#taxi => Taxi.id, #gare => Gare.nom)
 
 **Voyageur**(#id : integer, nom : string, prenom : string, adresse : string, tel : integer)
 
-**Employe**(#id : integer, nom : string, prenom : string, adresse : string, tel : integer, metier : {Guichetier, Aiguilleur})
+**Employe**(#id : integer, nom : string, prenom : string, adresse : string, tel : integer, metier : {Guichetier, Aiguilleur}, ddn : date)
 
 **Temps_plein**(#employe => Employer.id, #gare => Gare.nom)
 
@@ -24,16 +24,15 @@
 
 **Type_train**(#nom : string, nb_place_max : integer, premiere_classe_dispo : boolean, vitesse_max : integer)
 
-**Train**(#numero, type => Type_train.nom)
+**Train**(#numero : integer, type => Type_train.nom)
 
-**Itineraire**(#id : int, type_train => Type_train)
+**Itineraire**(#id : integer, type_train => Type_train)
 
-**Portion**(#itineraire => Itineraire.id, #horaire_depart = timestamp, depart => Gare.nom, arrivee => Gare.nom, horaire_arrivee = timestamp)
+**Portion**(#itineraire => Itineraire.id, #horaire_depart = timestamp, depart => Gare.nom, arrivee => Gare.nom, horaire_arrivee = timestamp, prix : integer)
 
-**Billet**(#heure_achat : timestamp, #voyageur => Voyageur.id, paiement : {CB, espece, cheque}, prix : integer, internet : boolean,
-assurance : integer)
+**Billet**(#heure_achat : timestamp, #voyageur => Voyageur.id, paiement : {CB, espece, cheque}, internet : boolean, assurance : integer)
 
-**Trajet**(#billet_heure => Billet.heure_achat, #billet_voyageur => Billet.voyageur, #itineraire_portion => Portion.itineraire, #depart => Portion.horaire_depart, siege : int, train => Train.numero)
+**Trajet**(#billet_heure => Billet.heure_achat, #voyageur => Billet.voyageur, #portion => Portion.itineraire, #depart => Portion.horaire_depart, siege : int, train => Train.numero)
 
 
 
@@ -47,17 +46,16 @@ vAiguilleur = PROJECTION(RESTRICTION(**Employe**, metier = Aiguilleur) nom, pren
 
 vContrat = UNION(PROJECTION(**Temps_plein**, employe, gare), PROJECTION(**Mi_temps**, employer, gare))
 
+
 ## contraintes
 
-Toues les attributs sont NOT NULL
+Tous les attributs sont NOT NULL
 
 **Ville**.GMT est compris entre -12 et 12
 
-**Gare**.adresse est UNIQUE
+**Hotel**.tel est UNIQUE
 
-**Hotel**.adresse et **Hotel**.tel est UNIQUE
-
-**Taxi**.adresse et **Taxi**.tel est UNIQUE
+**Taxi**.tel est UNIQUE
 
 **Temps_plein**.employe est UNIQUE
 
@@ -65,7 +63,11 @@ Toues les attributs sont NOT NULL
 
 **Type_train**.vitesse_max > 0
 
-**Trajet**.siege est compris entre 0 et **Trajet**.train.nb_place_max
+**Trajet**.siege > 0
+
+**Trajet**.siege < **Trajet**.**Itineraire**.**Type_train**.nb_place_max
+
+**Trajet**.**Train**.**Type_train**.nom = **Trajet**.**Itineraire**.**Type_train**.nom
 
 **Portion**.horaire_depart < **Portion**.horaire_arrivee
 
@@ -74,9 +76,6 @@ INTERSECTION(PROJECTION(**Voyageur**, id), PROJECTION(**Employe**, id)) = {}
 INTERSECTION(PROJECTION(**Temps_plein**, employe), PROJECTION(**Mi_temps**, employe)) = {}
 
 Il y a au plus 2 fois le même employé dans la table **Mi_temps**
-
-# DF et Normalisation :
-
 
 
 # Justification des héritages :
