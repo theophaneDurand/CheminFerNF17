@@ -47,7 +47,6 @@ Fichier contenant la note de clarification du projet.
 
 Fichier contenant le MLD relationnel, l'explication et les justifications de la normalisation et les justification des héritages.
 
-# ------------Non implémenté sous cette ligne-----------------------
 
 ### 4) creationTable.sql
 
@@ -58,10 +57,14 @@ Fichier contenant le code SQL permettant la création des tables de la base de d
 Fichier contenant des données de test afin de verifier le bon fonctionnement de la base de donnée.
 Ce fichier est le code SQL permettant d'insérer les données directement dans les tables crées par le fichier creationTables.sql.
 
-### 6) requetes.sql
+### 6) suppressionTables.sql
+
+Fichier contenant le code SQL permettant de supprimer toutes les tables crées pour ce projet.
+
+# ------------Non implémenté sous cette ligne-----------------------
+
+### 7) requetes.sql
 
 Fichier contenant le code SQL des différetnes requetes demandées par le client (ainsi que certaines requêtes en algèbre relationnelle en commentaires).
 
-### 7) suppressionTables.sql
 
-Fichier contenant le code SQL permettant de supprimer toutes les tables crées pour ce projet.
