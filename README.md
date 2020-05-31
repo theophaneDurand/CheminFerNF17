@@ -43,9 +43,9 @@ Fichiers permettant de visualiser le diagramme UML en format png.
 
 Fichier contenant la note de clarification du projet.
 
-### 3) Relationnel_Normalisation_Héritage.md
+### 3) Relationnel_Héritage.md
 
-Fichier contenant le MLD relationnel, l'explication et les justifications de la normalisation et les justification des héritages.
+Fichier contenant le MLD relationnel et les justification des héritages.
 
 
 ### 4) creationTable.sql
