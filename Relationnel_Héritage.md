@@ -24,9 +24,9 @@
 
 **Type_train**(#nom : string, nb_place_max : integer, premiere_classe_dispo : boolean, vitesse_max : integer)
 
-**Train**(#numero, type => Type_train.nom)
+**Train**(#numero : integer, type => Type_train.nom)
 
-**Itineraire**(#id : int, type_train => Type_train)
+**Itineraire**(#id : integer, type_train => Type_train)
 
 **Portion**(#itineraire => Itineraire.id, #horaire_depart = timestamp, depart => Gare.nom, arrivee => Gare.nom, horaire_arrivee = timestamp, prix : integer)
 
