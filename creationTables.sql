@@ -14,16 +14,25 @@ DROP TABLE IF EXISTS Itineraire cascade;
 DROP TABLE IF EXISTS Portion cascade;
 DROP TABLE IF EXISTS Billet cascade;
 DROP TABLE IF EXISTS Trajet cascade;
+DROP VIEW IF EXISTS vArriveeItineraire cascade;
+DROP VIEW IF EXISTS vDepartItineraire cascade;
+DROP VIEW IF EXISTS vItineraire cascade;
+DROP VIEW IF EXISTS vHoraireItineraire cascade;
 DROP VIEW IF EXISTS vPersonne cascade;
 DROP VIEW IF EXISTS vGuichetier cascade;
 DROP VIEW IF EXISTS vAiguilleur cascade;
 DROP VIEW IF EXISTS vContrat cascade;
 DROP VIEW IF EXISTS vMi_temps cascade;
+DROP VIEW IF EXISTS vPortionBillet cascade;
+DROP VIEW IF EXISTS vPrixInternet cascade;
+DROP VIEW IF EXISTS vPrixNonInternet cascade;
+DROP VIEW IF EXISTS vPrixBillet cascade;
 DROP FUNCTION IF EXISTS fonction_personne;
 DROP FUNCTION IF EXISTS fonction_contrat;
 DROP FUNCTION IF EXISTS fonction_Mi_temps;
 DROP FUNCTION IF EXISTS fonction_siege;
 DROP FUNCTION IF EXISTS fonction_Type_Train_Trajet;
+
 
 --**Ville**(#nom : string, GMT : integer)
 CREATE TABLE Ville(
@@ -172,13 +181,15 @@ CREATE TABLE Billet(
 CREATE TABLE Trajet(
   billet_heure TIMESTAMP NOT NULL,
   voyageur INTEGER NOT NULL,
-  portion INTEGER NOT NULL,
+  itineraire INTEGER NOT NULL,
   depart TIMESTAMP NOT NULL,
+  arrivee TIMESTAMP NOT NULL,
   siege INTEGER NOT NULL,
   train INTEGER NOT NULL,
-  PRIMARY KEY (billet_heure, voyageur, portion, depart),
+  PRIMARY KEY (billet_heure, voyageur, itineraire, depart),
   FOREIGN KEY (billet_heure, voyageur) REFERENCES Billet(heure_achat, voyageur),
-  FOREIGN KEY (portion, depart) REFERENCES Portion(itineraire, horaire_depart),
+  FOREIGN KEY (itineraire, depart) REFERENCES Portion(itineraire, horaire_depart),
+  FOREIGN KEY (itineraire, arrivee) REFERENCES Portion(itineraire, horaire_depart),
   CHECK (siege > 0)
 );
 
@@ -203,11 +214,49 @@ SELECT employe, gare FROM Temps_plein
 UNION
 SELECT employe, gare FROM Mi_temps;
 
-CREATE VIEW vItineraire AS
-SELECT MIN(P.horaire_depart), I.id, I.type_train, P.depart, P.arrivee, MAX(P.horaire_arrivee)
+CREATE VIEW vHoraireItineraire AS
+SELECT MIN(P.horaire_depart)AS horaire_depart, I.id, MAX(P.horaire_arrivee) AS horaire_arrivee
 FROM Portion P, Itineraire I
 WHERE P.itineraire = I.id
-GROUP BY I.id, P.depart, P.arrivee;
+GROUP BY I.id;
+
+CREATE VIEW vDepartItineraire AS
+SELECT vHI.horaire_depart, vHI.id, P.depart
+FROM vHoraireItineraire vHI, Portion P
+WHERE P.itineraire = vHI.id AND P.horaire_depart = vHI.horaire_depart;
+
+CREATE VIEW vArriveeItineraire AS
+SELECT vHI.horaire_arrivee, vHI.id, P.arrivee
+FROM vHoraireItineraire vHI, Portion P
+WHERE P.itineraire = vHI.id AND P.horaire_arrivee = vHI.horaire_arrivee;
+
+CREATE VIEW vItineraire AS
+SELECT vAI.id, vDI.depart, vDI.horaire_depart, vAI.arrivee, vAI.horaire_arrivee, I.type_train
+FROM vArriveeItineraire vAI, vDepartItineraire vDI, Itineraire I
+WHERE vAI.id = vDI.id AND vAI.id = I.id;
+
+CREATE VIEW vPortionBillet AS
+SELECT  P.depart, P.arrivee, B.heure_achat, B.voyageur, B.paiement, B.internet, B.assurance, T.siege, T.train, T.depart AS horaire_depart, P.prix
+FROM Portion P, Billet B, Trajet T
+WHERE (T.billet_heure = B.heure_achat) AND (T.voyageur = B.voyageur) AND (T.itineraire = P.itineraire) AND (T.depart = P.horaire_depart)
+GROUP BY P.depart, P.arrivee, B.heure_achat, B.voyageur, B.paiement, B.internet, B.assurance, T.siege, T.train, T.depart, P.prix;
+
+CREATE VIEW vPrixInternet AS
+SELECT heure_achat, voyageur, SUM(prix) * 0.9 AS "prix"
+FROM vPortionBillet
+WHERE internet
+GROUP BY heure_achat, voyageur;
+
+CREATE VIEW vPrixNonInternet AS
+SELECT heure_achat, voyageur, SUM(prix) AS "prix"
+FROM vPortionBillet
+WHERE NOT(internet)
+GROUP BY heure_achat, voyageur;
+
+CREATE VIEW vPrixBillet AS
+SELECT heure_achat, voyageur, prix FROM vPrixNonInternet
+UNION
+SELECT heure_achat, voyageur, prix FROM vPrixInternet;
 
 CREATE FUNCTION fonction_personne()
   RETURNS trigger AS
@@ -296,7 +345,7 @@ $func$
 BEGIN
 IF EXISTS
     (
-        (SELECT Tra.siege, Type.nb_place_max FROM Trajet Tra, Type_train Type, Itineraire WHERE Tra.portion = Itineraire.id AND Itineraire.type_train = Type.nom AND Tra.siege > Type.nb_place_max)
+        (SELECT Tra.siege, Type.nb_place_max FROM Trajet Tra, Type_train Type, Itineraire WHERE Tra.itineraire = Itineraire.id AND Itineraire.type_train = Type.nom AND Tra.siege > Type.nb_place_max)
     )
 THEN
    RAISE EXCEPTION 'Le numero du siege ne peut être supperieur au nombre de siege maximal';
@@ -317,7 +366,7 @@ $func$
 BEGIN
 IF EXISTS
     (
-        (SELECT Trajet.train FROM Trajet, Type_train Type, Train, Itineraire, Portion WHERE Trajet.train = Train.numero AND Trajet.portion = Portion.itineraire AND Portion.itineraire = Itineraire.id AND Train.type != Itineraire.type_train)
+        (SELECT Trajet.train FROM Trajet, Type_train Type, Train, Itineraire, Portion WHERE Trajet.train = Train.numero AND Trajet.itineraire = Portion.itineraire AND Portion.itineraire = Itineraire.id AND Train.type != Itineraire.type_train)
     )
 THEN
    RAISE EXCEPTION 'Le type de train que vous entrez ne correspond pas au type de train pour cet itineraire';
