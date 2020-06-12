@@ -39,9 +39,11 @@ Ce projet a été réalisé en SQL pour le SGBD Postgres.
 
 Fichiers permettant de visualiser le diagramme UML en format png.
 
-### 2) UML.png
+### 2) UMLJSON.png
 
-Fichiers permettant de visualiser le diagramme UML en format png.
+Fichiers permettant de visualiser le diagramme UML en format png pour la mise à jour avec le JSON.
+Il est possible que cette version de l'UML ne soit pas totalement juste.
+
 
 ### 3) Note de clarification.md
 
