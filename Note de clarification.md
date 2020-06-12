@@ -70,8 +70,9 @@ Un voyageur ne peut être un employé, ni l'inverse.
 
 Les billets sont achetés par des passagers dont on souhaite connaître le nom, le prénom, l'adresse et le numéro de téléphone.
 On souhaite aussi connaître la méthode de paiement (chèque, espèce, CB...).
-Le prix du billet est diminué de 10% si la vente s'est fait en ligne. Il est aussi possible de souscrire à une assurance qui permet de modifier les dates du billet. Cette assurance permet aussi d'annuler gratuitement le billet. Sans l'assurance, l'anulation coute 10% du prix du billet.
-Le prix du billet est définit par le prix des différentes portions du voyage
+Le prix du billet est diminué de 10% si la vente s'est fait en ligne. Il est aussi possible de souscrire à une assurance qui permet de modifier les dates du billet. Cette assurance permet aussi d'annuler gratuitement le billet. Sans l'assurance, l'annulation coute 10% du prix du billet.
+Le prix du billet est définit par le prix des différentes portions du voyage.
+Un trajet est composé de 2 portions, une de départ et une d'arrivée qui déretmient le trajet total du voyageur sur un même itinéraire.
 
 Un billet peut être composé de plusieurs trajet.
 A chaque trajet est associé un train et un numéro de siège. Un trajet effecute une portion d'itinéraire. Le trajet est identifié par le billet qui lui correspond et par l'horaire de départ de sa portion.
