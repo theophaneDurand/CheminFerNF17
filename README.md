@@ -46,6 +46,7 @@ Fichier contenant la note de clarification du projet.
 ### 3) Relationnel_Héritage.md
 
 Fichier contenant le MLD relationnel et les justification des héritages.
+*La note de clarification n'a pas été mise à jour pour le projet avc implementation JSON
 
 
 ### 4) creationTable.sql
@@ -55,16 +56,64 @@ Fichier contenant le code SQL permettant la création des tables de la base de d
 ### 5) donnees.sql
 
 Fichier contenant des données de test afin de verifier le bon fonctionnement de la base de donnée.
+
 Ce fichier est le code SQL permettant d'insérer les données directement dans les tables crées par le fichier creationTables.sql.
 
-### 6) suppressionTables.sql
+### 6) creationTableJSON.sql
+
+Fichier contenant le code SQL permettant la création des tables de la base de donnée du projet avec la version JSON.
+
+### 7) donnees.sql
+
+Fichier contenant des données de test afin de verifier le bon fonctionnement de la base de donnée avec la version JSON.
+
+Ce fichier est le code SQL permettant d'insérer les données directement dans les tables crées par le fichier creationTablesJSON.sql.
+
+### 8) suppressionTables.sql
 
 Fichier contenant le code SQL permettant de supprimer toutes les tables crées pour ce projet.
 
-# ------------Non implémenté sous cette ligne-----------------------
 
-### 7) requetes.sql
+### 9) requetes.sql
 
 Fichier contenant le code SQL des différetnes requetes demandées par le client (ainsi que certaines requêtes en algèbre relationnelle en commentaires).
 
+Les requetes fonctionnent pour la version JSON du projet.
 
+Ce fichier est composé de 4 requetes : 
+##### Requete 1 : Nombre de voyageurs sur chacun des trains.
+
+Cette requete donne le nombre de voyageur (toutes portions confondues) sur un même train. 
+
+Son retour donne le numéro du train et le nombre de personnes sous ce format :
+
+|numero_train | nombre de voyageurs|
+|-|-|
+| | | 
+ 
+##### Requete 2 : Pour une gare d'arrivée, une de départ et un interval de prix, renvoit les trajets correspondant.
+
+Les gare de départ et d'arrivée dont à entrer dans la section *WHERE*
+la fourchette de prix est à entrer dans la section * HAVING*
+
+Le retour est sous cette forme : 
+
+numero train | horaire depart | gare depart | horaire arrvee | gare arrivee | prix
+-|-|-|-|-|-
+|||||
+
+##### Requete 3 : Obtenir la liste des gares en sureffectifs avec le nombre d'equivalent temps plein en trop.
+
+Le retour est sous cette forme :
+
+|gare | ETP exedentaire|
+|-|-|
+|||
+
+##### Requete 4 : Pour chaque portion d'itinéraire : obtenir l'age moyen des voyageurs.
+
+Le retour est sous cette forme : 
+
+itineraire | gare depart | gare arrivee | moyenne d'age
+-|-|-|-
+|||
