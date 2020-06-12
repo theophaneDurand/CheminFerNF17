@@ -287,6 +287,30 @@ VALUES(2024, 'Alice', 'Macron', '2 rue du riz', 331111142, 'Aiguilleur');
 INSERT INTO Employe(id, nom, prenom, adresse, tel, metier)
 VALUES(2025, 'Alice', 'Macron', '2 rue du riz', 331111143, 'Guichetier');
 
+INSERT INTO Employe(id, nom, prenom, adresse, tel, metier)
+VALUES(2026, 'Jeanne', 'Macron', '2 rue du riz', 331111144, 'Aiguilleur');
+
+INSERT INTO Employe(id, nom, prenom, adresse, tel, metier)
+VALUES(2027, 'Alice', 'Macron', '2 rue du riz', 331111145, 'Guichetier');
+
+INSERT INTO Employe(id, nom, prenom, adresse, tel, metier)
+VALUES(2028, 'Alice', 'Macron', '2 rue du riz', 331111146, 'Aiguilleur');
+
+INSERT INTO Employe(id, nom, prenom, adresse, tel, metier)
+VALUES(2029, 'Alice', 'Macron', '2 rue du riz', 331111147, 'Guichetier');
+
+INSERT INTO Employe(id, nom, prenom, adresse, tel, metier)
+VALUES(2030, 'Alice', 'Macron', '2 rue du riz', 331111148, 'Aiguilleur');
+
+INSERT INTO Employe(id, nom, prenom, adresse, tel, metier)
+VALUES(2031, 'Alice', 'Macron', '2 rue du riz', 331111149, 'Guichetier');
+
+INSERT INTO Employe(id, nom, prenom, adresse, tel, metier)
+VALUES(2032, 'Alice', 'Macron', '2 rue du riz', 331111150, 'Aiguilleur');
+
+INSERT INTO Employe(id, nom, prenom, adresse, tel, metier)
+VALUES(2033, 'Alice', 'Macron', '2 rue du riz', 331111151, 'Guichetier');
+
 INSERT INTO Temps_plein(employe, gare)
 VALUES(2000, 'St Lazare');
 
@@ -377,6 +401,26 @@ VALUES(2024, 'Beijing');
 INSERT INTO Temps_plein(employe, gare)
 VALUES(2025, 'Beijing');
 
+INSERT INTO Temps_plein(employe, gare)
+VALUES(2026, 'Beijing');
+
+INSERT INTO Temps_plein(employe, gare)
+VALUES(2027, 'Beijing');
+
+INSERT INTO Temps_plein(employe, gare)
+VALUES(2029, 'St Laud');
+
+INSERT INTO Mi_temps(employe, gare)
+VALUES(2030, 'St Laud');
+
+INSERT INTO Mi_temps(employe, gare)
+VALUES(2031, 'Montparnasse');
+
+INSERT INTO Temps_plein(employe, gare)
+VALUES(2033, 'Oriente');
+
+INSERT INTO Temps_plein(employe, gare)
+VALUES(2028, 'King Cross');
 
 INSERT INTO Type_train(nom, nb_place_max, premiere_classe_dispo, vitesse_max)
 VALUES('TGV', 500, true, 500);
@@ -524,50 +568,29 @@ INSERT INTO Billet(heure_achat, voyageur, paiement, internet, assurance)
 VALUES('2020-05-11 12:13:00', 1005, 'espece', false, true);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-19 12:13:00', 1000, 10000, '2020-07-19 00:00:00', 1, 8000);
-
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-19 12:13:00', 1000, 10000, '2020-07-19 02:03:00', 1, 8000);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
+VALUES('2020-05-19 12:13:00', 1000, 10000, '2020-07-19 00:00:00', '2020-07-19 02:03:00', 1, 8000);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-17 12:13:00', 1002, 10001, '2020-07-19 00:00:00', 11, 8001);
-
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-17 12:13:00', 1002, 10001, '2020-07-19 02:03:00', 11, 8001);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
+VALUES('2020-05-17 12:13:00', 1002, 10001, '2020-07-19 00:00:00', '2020-07-19 02:03:00', 11, 8001);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-15 12:13:00', 1002, 10002, '2020-07-19 00:00:00', 10, 8011);
-
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-15 12:13:00', 1002, 10002, '2020-07-19 10:03:00', 10, 8011);
-
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-15 12:13:00', 1002, 10002, '2020-07-19 13:03:00', 10, 8011);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
+VALUES('2020-05-15 12:13:00', 1002, 10002, '2020-07-19 00:00:00', '2020-07-19 13:03:00', 10, 8011);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-19 12:13:00', 1003, 10003, '2020-07-19 05:03:00', 80, 8021);
-
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-19 12:13:00', 1003, 10003, '2020-07-19 08:03:00', 80, 8021);
-
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-19 12:13:00', 1003, 10003, '2020-07-19 10:03:00', 80, 8021);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
+VALUES('2020-05-19 12:13:00', 1003, 10003, '2020-07-19 05:03:00', '2020-07-19 10:03:00', 80, 8021);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-13 12:13:00', 1004, 10004, '2020-07-19 12:03:00', 100, 8023);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
+VALUES('2020-05-13 12:13:00', 1004, 10004, '2020-07-19 12:03:00', '2020-07-19 12:03:00', 100, 8023);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-14 12:13:00', 1005, 10005, '2020-07-19 13:03:00', 100, 8010);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
+VALUES('2020-05-14 12:13:00', 1005, 10005, '2020-07-19 13:03:00', '2020-07-19 13:03:00', 100, 8010);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-11 12:13:00', 1005, 10004, '2020-07-19 12:03:00', 140, 8023);
-
-INSERT INTO Trajet(billet_heure, voyageur, portion, depart, siege, train)
-VALUES('2020-05-11 12:13:00', 1005, 10004, '2020-07-19 12:13:00', 140, 8023);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
+VALUES('2020-05-11 12:13:00', 1005, 10004, '2020-07-19 12:03:00', '2020-07-19 12:13:00', 140, 8023);
