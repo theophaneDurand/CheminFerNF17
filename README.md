@@ -39,42 +39,46 @@ Ce projet a été réalisé en SQL pour le SGBD Postgres.
 
 Fichiers permettant de visualiser le diagramme UML en format png.
 
-### 2) Note de clarification.md
+### 2) UML.png
+
+Fichiers permettant de visualiser le diagramme UML en format png.
+
+### 3) Note de clarification.md
 
 Fichier contenant la note de clarification du projet.
 
-### 3) Relationnel_Héritage.md
+### 4) Relationnel_Héritage.md
 
 Fichier contenant le MLD relationnel et les justification des héritages.
 *La note de clarification n'a pas été mise à jour pour le projet avc implementation JSON*
 
 
-### 4) creationTable.sql
+### 5) creationTable.sql
 
 Fichier contenant le code SQL permettant la création des tables de la base de donnée du projet.
 
-### 5) donnees.sql
+### 6) donnees.sql
 
 Fichier contenant des données de test afin de verifier le bon fonctionnement de la base de donnée.
 
 Ce fichier est le code SQL permettant d'insérer les données directement dans les tables crées par le fichier creationTables.sql.
 
-### 6) creationTableJSON.sql
+### 7) creationTableJSON.sql
 
 Fichier contenant le code SQL permettant la création des tables de la base de donnée du projet avec la version JSON.
 
-### 7) donnees.sql
+### 8) donnees.sql
 
 Fichier contenant des données de test afin de verifier le bon fonctionnement de la base de donnée avec la version JSON.
 
 Ce fichier est le code SQL permettant d'insérer les données directement dans les tables crées par le fichier creationTablesJSON.sql.
 
-### 8) suppressionTables.sql
+### 9) suppressionTables.sql
 
 Fichier contenant le code SQL permettant de supprimer toutes les tables crées pour ce projet.
 
 
-### 9) requetes.sql
+### 10) requetes.sql
 
 Fichier contenant le code SQL des différetnes requetes demandées par le client (ainsi que certaines requêtes en algèbre relationnelle en commentaires).
 
