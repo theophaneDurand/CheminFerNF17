@@ -46,7 +46,7 @@ Fichier contenant la note de clarification du projet.
 ### 3) Relationnel_Héritage.md
 
 Fichier contenant le MLD relationnel et les justification des héritages.
-*La note de clarification n'a pas été mise à jour pour le projet avc implementation JSON
+*La note de clarification n'a pas été mise à jour pour le projet avc implementation JSON*
 
 
 ### 4) creationTable.sql
