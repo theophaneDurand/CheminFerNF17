@@ -24,15 +24,15 @@
 
 **Type_train**(#nom : string, nb_place_max : integer, premiere_classe_dispo : boolean, vitesse_max : integer)
 
-**Train**(#numero : integer, type => Type_train.nom)
+**Train**(#numero, type => Type_train.nom)
 
-**Itineraire**(#id : integer, type_train => Type_train)
+**Itineraire**(#id : int, type_train => Type_train)
 
 **Portion**(#itineraire => Itineraire.id, #horaire_depart = timestamp, depart => Gare.nom, arrivee => Gare.nom, horaire_arrivee = timestamp, prix : integer)
 
 **Billet**(#heure_achat : timestamp, #voyageur => Voyageur.id, paiement : {CB, espece, cheque}, internet : boolean, assurance : integer)
 
-**Trajet**(#billet_heure => Billet.heure_achat, #voyageur => Billet.voyageur, #portion => Portion.itineraire, #depart => Portion.horaire_depart, siege : int, train => Train.numero)
+**Trajet**(#billet_heure => Billet.heure_achat, #voyageur => Billet.voyageur, #itineraire => Portion.itineraire, #depart => Portion.horaire_depart, arrivee => Portion.horaire_depart, siege : int, train => Train.numero)
 
 
 
@@ -53,11 +53,11 @@ Tous les attributs sont NOT NULL
 
 **Ville**.GMT est compris entre -12 et 12
 
-**Hotel**.tel est UNIQUE
+**Hotel**.tel est clé
 
-**Taxi**.tel est UNIQUE
+**Taxi**.tel est clé
 
-**Temps_plein**.employe est UNIQUE
+**Temps_plein**.employe est clé
 
 **Type_train**.nb_place_max > 0
 
