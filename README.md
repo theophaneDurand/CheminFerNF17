@@ -80,11 +80,10 @@ Ce fichier est le code SQL permettant d'insérer les données directement dans l
 Fichier contenant le code SQL permettant de supprimer toutes les tables crées pour ce projet.
 
 
-### 10) requetes.sql
+### 10) requetes.sql & requetesJSON.sql
 
 Fichier contenant le code SQL des différetnes requetes demandées par le client (ainsi que certaines requêtes en algèbre relationnelle en commentaires).
 
-Les requetes fonctionnent pour la version JSON du projet.
 
 Ce fichier est composé de 4 requetes : 
 ##### Requete 1 : Nombre de voyageurs sur chacun des trains.
