@@ -26,13 +26,13 @@
 
 **Train**(#numero, type => Type_train.nom)
 
-**Itineraire**(#id : int, type_train => Type_train)
+**Itineraire**(#id : int, type_train => Type_train, train => Train.numero)
 
 **Portion**(#itineraire => Itineraire.id, #horaire_depart = timestamp, depart => Gare.nom, arrivee => Gare.nom, horaire_arrivee = timestamp, prix : integer)
 
 **Billet**(#heure_achat : timestamp, #voyageur => Voyageur.id, paiement : {CB, espece, cheque}, internet : boolean, assurance : integer)
 
-**Trajet**(#billet_heure => Billet.heure_achat, #voyageur => Billet.voyageur, #itineraire => Portion.itineraire, #depart => Portion.horaire_depart, arrivee => Portion.horaire_depart, siege : int, train => Train.numero)
+**Trajet**(#billet_heure => Billet.heure_achat, #voyageur => Billet.voyageur, #itineraire => Portion.itineraire, #depart => Portion.horaire_depart, arrivee => Portion.horaire_depart, siege : int)
 
 
 
