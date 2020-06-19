@@ -497,48 +497,48 @@ VALUES(10005, 'TER', 8010,
 INSERT INTO Billet(heure_achat, voyageur, paiement, internet, assurance, trajet)
 VALUES('2020-05-19 12:13:00', 1000, 'CB', true, false,
   '[
-  {"itineraire" : 10000, "depart": "2020-07-19 00:00:00", "arrivee" : "2020-07-19 02:00:00", "siege" : 1},
-  {"itineraire" : 10002, "depart": "2020-07-19 00:00:00", "arrivee" : "2020-07-19 13:00:00", "siege" : 12}
+  {"itineraire" : 10000, "depart": "2020-07-19 00:00:00", "gare_depart" : "St Laud","arrivee" : "2020-07-19 02:00:00", "gare_arrivee" : "Montparnasse", "siege" : 1},
+  {"itineraire" : 10002, "depart": "2020-07-19 00:00:00", "gare_depart" : "Oriente", "arrivee" : "2020-07-19 13:00:00", "gare_arrivee" : "Montparnasse", "siege" : 12}
   ]');
 
 
 INSERT INTO Billet(heure_achat, voyageur, paiement, internet, assurance, trajet)
 VALUES('2020-05-17 12:13:00', 1002, 'cheque', true, true,
   '[
-  {"itineraire" : 10001, "depart": "2020-07-19 00:00:00", "arrivee" : "2020-07-19 02:00:00", "siege" : 11}
-  ]  ');
+  {"itineraire" : 10001, "depart": "2020-07-19 00:00:00", "gare_depart" : "St Laud", "arrivee" : "2020-07-19 02:00:00", "gare_arrivee" : "Montparnasse", "siege" : 11}
+  ]');
 
 
 INSERT INTO Billet(heure_achat, voyageur, paiement, internet, assurance, trajet)
 VALUES('2020-05-15 12:13:00', 1002, 'CB', true, true,
   '[
-  {"itineraire" : 10002, "depart": "2020-07-19 00:00:00", "arrivee" : "2020-07-19 13:00:00", "siege" : 10}
-  ]');;
+  {"itineraire" : 10002, "depart": "2020-07-19 00:00:00", "gare_depart" : "Oriente", "arrivee" : "2020-07-19 13:00:00", "gare_arrivee" : "Montparnasse", "siege" : 10}
+  ]');
 
 
 INSERT INTO Billet(heure_achat, voyageur, paiement, internet, assurance, trajet)
 VALUES('2020-05-19 12:13:00', 1003, 'espece', false, false,
   '[
-  {"itineraire" : 10003, "depart": "2020-07-19 05:03:00", "arrivee" : "2020-07-19 10:00:00", "siege" : 80}
+  {"itineraire" : 10003, "depart": "2020-07-19 05:03:00", "gare_depart" : "Oriente", "arrivee" : "2020-07-19 10:00:00", "gare_arrivee" : "Termini", "siege" : 80}
   ]');
 
 
 INSERT INTO Billet(heure_achat, voyageur, paiement, internet, assurance, trajet)
 VALUES('2020-05-13 12:13:00', 1004, 'cheque', true, true,
   '[
-  {"itineraire" : 10004, "depart": "2020-07-19 12:03:00", "arrivee" : "2020-07-19 12:10:00", "siege" : 100}
+  {"itineraire" : 10004, "depart": "2020-07-19 12:03:00", "gare_depart" : "St Lazare", "arrivee" : "2020-07-19 12:10:00", "gare_arrivee" : "Montparnasse", "siege" : 100}
   ]');
 
 
 INSERT INTO Billet(heure_achat, voyageur, paiement, internet, assurance, trajet)
 VALUES('2020-05-14 12:13:00', 1005, 'CB', true, false,
   '[
-  {"itineraire" : 10005, "depart": "2020-07-19 13:03:00", "arrivee" : "2020-07-19 22:00:00", "siege" : 100}
+  {"itineraire" : 10005, "depart": "2020-07-19 13:03:00", "gare_depart" : "King Cross", "arrivee" : "2020-07-19 22:00:00", "gare_arrivee" : "Termini", "siege" : 100}
   ]');
 
 
 INSERT INTO Billet(heure_achat, voyageur, paiement, internet, assurance, trajet)
 VALUES('2020-05-11 12:13:00', 1005, 'espece', false, true,
   '[
-  {"itineraire" : 10004, "depart": "2020-07-19 12:03:00", "arrivee" : "2020-07-19 12:10:00", "siege" : 140}
+  {"itineraire" : 10004, "depart": "2020-07-19 12:03:00", "gare_depart" : "St Lazare", "arrivee" : "2020-07-19 12:10:00", "gare_arrivee" : "Montparnasse", "siege" : 140}
   ]');
