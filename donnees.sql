@@ -463,23 +463,23 @@ INSERT INTO Train(numero, type)
 VALUES(8023, 'Intercite');
 
 
-INSERT INTO Itineraire(id, type_train)
-VALUES(10000, 'TGV');
+INSERT INTO Itineraire(id, type_train, train)
+VALUES(10000, 'TGV', 8000);
 
-INSERT INTO Itineraire(id, type_train)
-VALUES(10001, 'TGV');
+INSERT INTO Itineraire(id, type_train, train)
+VALUES(10001, 'TGV', 8001);
 
-INSERT INTO Itineraire(id, type_train)
-VALUES(10002, 'TER');
+INSERT INTO Itineraire(id, type_train, train)
+VALUES(10002, 'TER', 8011);
 
-INSERT INTO Itineraire(id, type_train)
-VALUES(10005, 'TER');
+INSERT INTO Itineraire(id, type_train, train)
+VALUES(10005, 'TER', 8010);
 
-INSERT INTO Itineraire(id, type_train)
-VALUES(10003, 'Intercite');
+INSERT INTO Itineraire(id, type_train, train)
+VALUES(10003, 'Intercite', 8021);
 
-INSERT INTO Itineraire(id, type_train)
-VALUES(10004, 'Intercite');
+INSERT INTO Itineraire(id, type_train, train)
+VALUES(10004, 'Intercite', 8023);
 
 
 INSERT INTO Portion(itineraire, horaire_depart, depart, arrivee, horaire_arrivee, prix)
@@ -568,29 +568,29 @@ INSERT INTO Billet(heure_achat, voyageur, paiement, internet, assurance)
 VALUES('2020-05-11 12:13:00', 1005, 'espece', false, true);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
-VALUES('2020-05-19 12:13:00', 1000, 10000, '2020-07-19 00:00:00', '2020-07-19 02:03:00', 1, 8000);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege)
+VALUES('2020-05-19 12:13:00', 1000, 10000, '2020-07-19 00:00:00', '2020-07-19 02:03:00', 1);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
-VALUES('2020-05-17 12:13:00', 1002, 10001, '2020-07-19 00:00:00', '2020-07-19 02:03:00', 11, 8001);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege)
+VALUES('2020-05-17 12:13:00', 1002, 10001, '2020-07-19 00:00:00', '2020-07-19 02:03:00', 11);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
-VALUES('2020-05-15 12:13:00', 1002, 10002, '2020-07-19 00:00:00', '2020-07-19 13:03:00', 10, 8011);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege)
+VALUES('2020-05-15 12:13:00', 1002, 10002, '2020-07-19 00:00:00', '2020-07-19 13:03:00', 10);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
-VALUES('2020-05-19 12:13:00', 1003, 10003, '2020-07-19 05:03:00', '2020-07-19 10:03:00', 80, 8021);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege)
+VALUES('2020-05-19 12:13:00', 1003, 10003, '2020-07-19 05:03:00', '2020-07-19 10:03:00', 80);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
-VALUES('2020-05-13 12:13:00', 1004, 10004, '2020-07-19 12:03:00', '2020-07-19 12:03:00', 100, 8023);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege)
+VALUES('2020-05-13 12:13:00', 1004, 10004, '2020-07-19 12:03:00', '2020-07-19 12:03:00', 100);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
-VALUES('2020-05-14 12:13:00', 1005, 10005, '2020-07-19 13:03:00', '2020-07-19 13:03:00', 100, 8010);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege)
+VALUES('2020-05-14 12:13:00', 1005, 10005, '2020-07-19 13:03:00', '2020-07-19 13:03:00', 100);
 
 
-INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege, train)
-VALUES('2020-05-11 12:13:00', 1005, 10004, '2020-07-19 12:03:00', '2020-07-19 12:13:00', 140, 8023);
+INSERT INTO Trajet(billet_heure, voyageur, itineraire, depart, arrivee, siege)
+VALUES('2020-05-11 12:13:00', 1005, 10004, '2020-07-19 12:03:00', '2020-07-19 12:13:00', 140);
