@@ -148,7 +148,9 @@ CREATE TABLE Train(
 CREATE TABLE Itineraire(
   id INTEGER PRIMARY KEY,
   type_train VARCHAR NOT NULL,
-  FOREIGN KEY (type_train) REFERENCES Type_train(nom)
+  train INTEGER NOT NULL,
+  FOREIGN KEY (type_train) REFERENCES Type_train(nom),
+  FOREIGN KEY (train) REFERENCES Train(numero)
 );
 
 --**Portion**(#itineraire => Itineraire.id, #horaire_depart = timestamp, depart => Gare.nom, arrivee => Gare.nom, horaire_arrivee = timestamp)
@@ -185,7 +187,6 @@ CREATE TABLE Trajet(
   depart TIMESTAMP NOT NULL,
   arrivee TIMESTAMP NOT NULL,
   siege INTEGER NOT NULL,
-  train INTEGER NOT NULL,
   PRIMARY KEY (billet_heure, voyageur, itineraire, depart),
   FOREIGN KEY (billet_heure, voyageur) REFERENCES Billet(heure_achat, voyageur),
   FOREIGN KEY (itineraire, depart) REFERENCES Portion(itineraire, horaire_depart),
@@ -212,7 +213,20 @@ WHERE metier = 'Aiguilleur';
 CREATE VIEW vContrat AS
 SELECT employe, gare FROM Temps_plein
 UNION
-SELECT employe, gare FROM Mi_temps;
+SELECT employe, gare FROM Mi_temps
+ORDER BY employe;
+
+CREATE VIEW vNb_TP_Gare AS
+SELECT G.nom AS gare, COUNT(TP.employe) AS TP
+FROM Gare G, Temps_plein TP
+WHERE G.nom = TP.gare
+GROUP BY G.nom;
+
+CREATE VIEW vNb_MT_Gare AS
+SELECT G.nom AS gare, COUNT(MT.employe) AS MT
+FROM Gare G, Mi_temps MT
+WHERE G.nom = MT.gare
+GROUP BY G.nom;
 
 CREATE VIEW vHoraireItineraire AS
 SELECT MIN(P.horaire_depart)AS horaire_depart, I.id, MAX(P.horaire_arrivee) AS horaire_arrivee
@@ -236,10 +250,10 @@ FROM vArriveeItineraire vAI, vDepartItineraire vDI, Itineraire I
 WHERE vAI.id = vDI.id AND vAI.id = I.id;
 
 CREATE VIEW vPortionBillet AS
-SELECT  P.depart, P.arrivee, B.heure_achat, B.voyageur, B.paiement, B.internet, B.assurance, T.siege, T.train, T.depart AS horaire_depart, P.prix
-FROM Portion P, Billet B, Trajet T
-WHERE (T.billet_heure = B.heure_achat) AND (T.voyageur = B.voyageur) AND (T.itineraire = P.itineraire) AND (T.depart = P.horaire_depart)
-GROUP BY P.depart, P.arrivee, B.heure_achat, B.voyageur, B.paiement, B.internet, B.assurance, T.siege, T.train, T.depart, P.prix;
+SELECT  P.depart, P.arrivee, B.heure_achat, B.voyageur, B.paiement, B.internet, B.assurance, T.siege, I.train, T.depart AS horaire_depart, P.prix
+FROM Portion P, Billet B, Trajet T, Itineraire I
+WHERE (T.billet_heure = B.heure_achat) AND (T.voyageur = B.voyageur) AND (T.itineraire = P.itineraire) AND (T.itineraire = I.id) AND (T.depart = P.horaire_depart)
+GROUP BY P.depart, P.arrivee, B.heure_achat, B.voyageur, B.paiement, B.internet, B.assurance, T.siege, I.train, T.depart, P.prix;
 
 CREATE VIEW vPrixInternet AS
 SELECT heure_achat, voyageur, SUM(prix) * 0.9 AS "prix"
@@ -359,24 +373,3 @@ CREATE CONSTRAINT TRIGGER trig_insff_siege
   AFTER INSERT OR UPDATE
   ON Trajet
   FOR EACH ROW EXECUTE PROCEDURE fonction_siege();
-
-CREATE FUNCTION fonction_Type_Train_Trajet()
-  RETURNS trigger AS
-$func$
-BEGIN
-IF EXISTS
-    (
-        (SELECT Trajet.train FROM Trajet, Type_train Type, Train, Itineraire, Portion WHERE Trajet.train = Train.numero AND Trajet.itineraire = Portion.itineraire AND Portion.itineraire = Itineraire.id AND Train.type != Itineraire.type_train)
-    )
-THEN
-   RAISE EXCEPTION 'Le type de train que vous entrez ne correspond pas au type de train pour cet itineraire';
-END IF;
-RETURN NEW;
-END
-$func$  LANGUAGE plpgsql;
-
-
-CREATE CONSTRAINT TRIGGER trig_insff_Type_Train_Trajet
-  AFTER INSERT OR UPDATE
-  ON Trajet
-  FOR EACH ROW EXECUTE PROCEDURE fonction_Type_Train_Trajet();
